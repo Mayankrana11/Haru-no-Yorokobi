@@ -1,1 +1,111 @@
-
+[
+  {
+    "category": "Sushi",
+    "items": [
+      {
+        "japaneseName": "寿司",
+        "englishName": "Sushi Platter",
+        "description": "An assortment of traditional nigiri sushi served with wasabi and soy sauce.",
+        "price": 480,
+        "imagePath": "assets/images/sushi_platter.jpg"
+      },
+      {
+        "japaneseName": "サーモンロール",
+        "englishName": "Salmon Roll",
+        "description": "Fresh salmon roll wrapped in seasoned rice and nori.",
+        "price": 520,
+        "imagePath": "assets/images/salmon_roll.jpg"
+      },
+      {
+        "japaneseName": "天ぷらロール",
+        "englishName": "Tempura Roll",
+        "description": "Crispy tempura-fried prawn roll with light soy glaze.",
+        "price": 550,
+        "imagePath": "assets/images/tempura_roll.jpg"
+      }
+    ]
+  },
+  {
+    "category": "Ramen",
+    "items": [
+      {
+        "japaneseName": "鶏ラーメン",
+        "englishName": "Chicken Ramen",
+        "description": "Rich chicken broth with noodles, green onions, and seasoned egg.",
+        "price": 450,
+        "imagePath": "assets/images/chicken_ramen.jpg"
+      },
+      {
+        "japaneseName": "煮卵ラーメン",
+        "englishName": "Nitamago Ramen",
+        "description": "Signature ramen with soft-boiled egg, bamboo shoots, and chashu-style chicken.",
+        "price": 490,
+        "imagePath": "assets/images/nitamago_ramen.jpg"
+      },
+      {
+        "japaneseName": "野菜ラーメン",
+        "englishName": "Vegetable Ramen",
+        "description": "Healthy miso ramen loaded with fresh seasonal vegetables.",
+        "price": 420,
+        "imagePath": "assets/images/vegetable_ramen.jpg"
+      }
+    ]
+  },
+  {
+    "category": "Yakisoba",
+    "items": [
+      {
+        "japaneseName": "焼きそば",
+        "englishName": "Classic Yakisoba",
+        "description": "Stir-fried noodles with vegetables and house yakisoba sauce.",
+        "price": 380,
+        "imagePath": "assets/images/yakisoba.jpg"
+      },
+      {
+        "japaneseName": "チキン焼きそば",
+        "englishName": "Chicken Yakisoba",
+        "description": "Savory yakisoba with tender chicken and spring onions.",
+        "price": 420,
+        "imagePath": "assets/images/chicken_yakisoba.jpg"
+      }
+    ]
+  },
+  {
+    "category": "Bento",
+    "items": [
+      {
+        "japaneseName": "弁当ボックス",
+        "englishName": "Vegetable Bento Box",
+        "description": "Traditional bento with steamed rice, pickles, and vegetable tempura.",
+        "price": 480,
+        "imagePath": "assets/images/veg_bento.jpg"
+      },
+      {
+        "japaneseName": "シーフード弁当",
+        "englishName": "Seafood Bento Box",
+        "description": "Combination of grilled fish, shrimp tempura, and rice with miso soup.",
+        "price": 620,
+        "imagePath": "assets/images/seafood_bento.jpg"
+      },
+      {
+        "japaneseName": "チキン弁当",
+        "englishName": "Chicken Bento Box",
+        "description": "Grilled teriyaki chicken with rice, salad, and tamago omelet.",
+        "price": 540,
+        "imagePath": "assets/images/chicken_bento.jpg"
+      }
+    ]
+  },
+  {
+    "category": "Omakase",
+    "items": [
+      {
+        "japaneseName": "おまかせ",
+        "englishName": "Chef’s Omakase",
+        "description": "A surprise course prepared by the chef — a mystery of spring’s delight.",
+        "price": 999,
+        "imagePath": "assets/images/omakase_mystery.jpg"
+      }
+    ]
+  }
+]
