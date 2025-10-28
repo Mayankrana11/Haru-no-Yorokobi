@@ -1,1 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Haru no Yorokobi — Menu</title>
+  <link rel="stylesheet" href="../styles/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="jp-title">春の喜び</div>
+      <div class="en-title">Haru no Yorokobi — Spring's Delight</div>
+    </div>
+    <div class="table-display">Table No. <span id="table-number">7</span></div>
+  </header>
 
+  <main class="container">
+    <!-- Category Tabs -->
+    <nav class="categories" id="category-tabs"></nav>
+
+    <!-- Menu Section -->
+    <section class="menu-section" id="menu"></section>
+
+    <!-- Cart and Reviews Sidebar -->
+    <aside class="cart">
+      <h3>Order</h3>
+      <div id="cart-items"></div>
+      <div class="cart-total">Total: ₹<span id="cart-total">0.00</span></div>
+      <div class="cart-actions">
+        <button id="view-payment" class="btn">Proceed to Payment</button>
+      </div>
+
+      <!-- Review Section -->
+      <div class="reviews">
+        <h4>Average Rating: <span id="avg-rating">—</span></h4>
+        <div id="recent-reviews"></div>
+
+        <form id="review-form">
+          <input type="text" id="reviewer-name" placeholder="Your name (optional)" />
+          <select id="review-rating">
+            <option value="5">5 — Excellent</option>
+            <option value="4">4 — Very good</option>
+            <option value="3">3 — Good</option>
+            <option value="2">2 — Fair</option>
+            <option value="1">1 — Poor</option>
+          </select>
+          <textarea id="review-comment" rows="2" placeholder="Write a short review"></textarea>
+          <button type="submit" class="btn small">Submit Review</button>
+        </form>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <div>© Haru no Yorokobi</div>
+  </footer>
+
+  <!-- Script order matters -->
+  <script src="../scripts/review.js"></script>
+  <script src="../scripts/script.js"></script>
+</body>
+</html>

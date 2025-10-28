@@ -1,0 +1,4 @@
+body{font-family:Inter, "Noto Sans JP", sans-serif;background:#fffaf9;margin:0;display:flex;align-items:center;justify-content:center;height:100vh}
+.confirm{width:680px;background:#fff;padding:24px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.06)}
+h2{margin-top:0}
+.btn{background:#2b2b2b;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none}

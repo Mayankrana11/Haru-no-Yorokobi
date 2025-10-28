@@ -1,1 +1,65 @@
+/* Main theme for Haru no Yorokobi. Keep comments human-like and minimal. */
 
+:root{
+  --bg:#fffaf9;
+  --panel:#fff;
+  --muted:#6b6b6b;
+  --accent:#f5c6d0; /* sakura pink */
+  --dark:#2b2b2b;
+  --card-shadow: 0 6px 20px rgba(36,36,36,0.08);
+  --radius:14px;
+  --max-width:1100px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter, "Noto Sans JP", sans-serif;background:linear-gradient(180deg,var(--bg),#fff);color:var(--dark);-webkit-font-smoothing:antialiased}
+
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;padding:18px 28px;background:transparent;
+  max-width:var(--max-width);margin:18px auto 0;gap:12px;
+}
+.brand .jp-title{font-family:"Noto Serif JP", "Sawarabi Mincho", serif;font-size:24px}
+.brand .en-title{font-size:12px;color:var(--muted)}
+
+.container{
+  max-width:var(--max-width);margin:22px auto;padding:18px;display:grid;grid-template-columns:1fr 320px;gap:20px;
+}
+
+/* category tabs */
+.categories{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.categories button{background:#fff;border:1px solid #f0e7e7;padding:6px 12px;border-radius:999px;cursor:pointer}
+.categories button.active{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* menu grid */
+.menu-section{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.card{
+  background:var(--panel);border-radius:12px;padding:12px;box-shadow:var(--card-shadow);display:flex;flex-direction:column;gap:8px;
+}
+.card img{width:100%;height:140px;object-fit:cover;border-radius:8px}
+.card .names{display:flex;flex-direction:column}
+.jp-name{font-family:"Noto Serif JP", "Sawarabi Mincho", serif;font-size:16px}
+.en-name{font-size:13px;color:var(--muted)}
+.card .desc{font-size:12px;color:var(--muted);min-height:34px}
+.card .controls{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:30px;height:30px;border-radius:6px;border:1px solid #eee;background:#fff;cursor:pointer}
+.price{font-weight:600}
+
+/* cart aside */
+.cart{background:var(--panel);padding:12px;border-radius:12px;box-shadow:var(--card-shadow);position:sticky;top:18px;height:fit-content}
+.cart h3{margin:0 0 8px 0}
+#cart-items{min-height:80px}
+.cart-total{font-weight:700;margin-top:10px}
+.btn{background:var(--dark);color:#fff;padding:10px 12px;border:none;border-radius:8px;cursor:pointer}
+.btn.small{padding:8px 10px;font-size:13px}
+.cart-actions{margin-top:12px}
+.reviews{margin-top:18px}
+.reviews form{display:flex;flex-direction:column;gap:8px}
+.reviews input, .reviews textarea, .reviews select{padding:8px;border:1px solid #eee;border-radius:6px;font-size:13px}
+
+.footer{max-width:var(--max-width);margin:22px auto;padding:12px;text-align:center;color:var(--muted)}
+
+@media (max-width:900px){
+  .container{grid-template-columns:1fr; padding:12px}
+  .cart{position:relative;top:0}
+}

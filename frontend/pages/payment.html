@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Payment — Haru no Yorokobi</title>
+  <link rel="stylesheet" href="../styles/payment.css" />
+</head>
+<body>
+  <main class="payment-container">
+    <h2>Payment</h2>
+    <div id="order-summary"></div>
+
+    <div class="methods">
+      <label><input type="radio" name="method" value="UPI" checked /> UPI (QR)</label>
+      <label><input type="radio" name="method" value="CARD" /> Credit/Debit Card</label>
+      <label><input type="radio" name="method" value="CASH" /> Pay at Counter (Cash)</label>
+    </div>
+
+    <div id="method-area"></div>
+
+    <div class="actions">
+      <button id="pay-btn" class="btn">Pay / Confirm</button>
+      <a href="index.html" class="btn ghost">Back to Menu</a>
+    </div>
+  </main>
+
+  <script src="../scripts/payment.js"></script>
+</body>
+</html>
