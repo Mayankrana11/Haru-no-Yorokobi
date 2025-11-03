@@ -1,65 +1,143 @@
-/* Main theme for Haru no Yorokobi. Keep comments human-like and minimal. */
+/* ADDED: Tailwind imports to enable theme() function */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root{
-  --bg:#fffaf9;
-  --panel:#fff;
-  --muted:#6b6b6b;
-  --accent:#f5c6d0; /* sakura pink */
-  --dark:#2b2b2b;
-  --card-shadow: 0 6px 20px rgba(36,36,36,0.08);
-  --radius:14px;
-  --max-width:1100px;
+/* Custom styles to match the Figma design */
+body {
+    font-family: 'Inter', sans-serif;
+    /* This dark background provides the frame for the tablet */
+    background-color: #111827; /* Dark gray, almost black */
 }
 
-*{box-sizing:border-box}
-html,body{height:100%;margin:0;font-family:Inter, "Noto Sans JP", sans-serif;background:linear-gradient(180deg,var(--bg),#fff);color:var(--dark);-webkit-font-smoothing:antialiased}
-
-.topbar{
-  display:flex;justify-content:space-between;align-items:center;padding:18px 28px;background:transparent;
-  max-width:var(--max-width);margin:18px auto 0;gap:12px;
-}
-.brand .jp-title{font-family:"Noto Serif JP", "Sawarabi Mincho", serif;font-size:24px}
-.brand .en-title{font-size:12px;color:var(--muted)}
-
-.container{
-  max-width:var(--max-width);margin:22px auto;padding:18px;display:grid;grid-template-columns:1fr 320px;gap:20px;
+/* We'll use a wrapper to simulate the tablet's screen dimensions */
+.tablet-wrapper {
+    width: 1024px;
+    height: 1350px;
+    margin: 40px auto; /* Center the tablet simulation */
+    border-radius: 2.5rem; /* Rounded corners for the tablet body */
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    border: 12px solid #1a1a1a; /* Tablet bezel */
+    position: relative;
 }
 
-/* category tabs */
-.categories{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
-.categories button{background:#fff;border:1px solid #f0e7e7;padding:6px 12px;border-radius:999px;cursor:pointer}
-.categories button.active{background:var(--accent);border-color:var(--accent);color:#fff}
-
-/* menu grid */
-.menu-section{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
-.card{
-  background:var(--panel);border-radius:12px;padding:12px;box-shadow:var(--card-shadow);display:flex;flex-direction:column;gap:8px;
+/* UPDATED: App shell is now white */
+.app-shell {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF; /* Changed from gradient to white */
 }
-.card img{width:100%;height:140px;object-fit:cover;border-radius:8px}
-.card .names{display:flex;flex-direction:column}
-.jp-name{font-family:"Noto Serif JP", "Sawarabi Mincho", serif;font-size:16px}
-.en-name{font-size:13px;color:var(--muted)}
-.card .desc{font-size:12px;color:var(--muted);min-height:34px}
-.card .controls{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
-.qty{display:flex;align-items:center;gap:6px}
-.qty button{width:30px;height:30px;border-radius:6px;border:1px solid #eee;background:#fff;cursor:pointer}
-.price{font-weight:600}
 
-/* cart aside */
-.cart{background:var(--panel);padding:12px;border-radius:12px;box-shadow:var(--card-shadow);position:sticky;top:18px;height:fit-content}
-.cart h3{margin:0 0 8px 0}
-#cart-items{min-height:80px}
-.cart-total{font-weight:700;margin-top:10px}
-.btn{background:var(--dark);color:#fff;padding:10px 12px;border:none;border-radius:8px;cursor:pointer}
-.btn.small{padding:8px 10px;font-size:13px}
-.cart-actions{margin-top:12px}
-.reviews{margin-top:18px}
-.reviews form{display:flex;flex-direction:column;gap:8px}
-.reviews input, .reviews textarea, .reviews select{padding:8px;border:1px solid #eee;border-radius:6px;font-size:13px}
+/* Custom Japanese font for titles */
+.font-jp {
+    font-family: 'Shippori Mincho', serif;
+}
 
-.footer{max-width:var(--max-width);margin:22px auto;padding:12px;text-align:center;color:var(--muted)}
+/* Main content area styling */
+.main-content {
+    background: #FFFFFF;
+    border-top-left-radius: 2.5rem;
+    border-top-right-radius: 2.5rem;
+    flex-grow: 1;
+    overflow-y: auto;
+    /* Smooth scrolling */
+    scroll-behavior: smooth;
+    /* REMOVED: Black border (header is black now) */
+}
 
-@media (max-width:900px){
-  .container{grid-template-columns:1fr; padding:12px}
-  .cart{position:relative;top:0}
+/* Custom scrollbar */
+.main-content::-webkit-scrollbar {
+    width: 8px;
+}
+.main-content::-webkit-scrollbar-thumb {
+    background-color: #d1d5db; /* Light gray scrollbar */
+    border-radius: 4px;
+}
+.main-content::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* Active navigation item state */
+.nav-item {
+    transition: all 0.2s ease-in-out;
+    opacity: 0.7; /* Inactive items are faded */
+    filter: blur(1px); /* "Blur out" inactive items */
+}
+
+/* UPDATED: Active nav item uses red-accent */
+.nav-item.active {
+    opacity: 1;
+    filter: blur(0); /* Un-blur active item */
+    transform: scale(1.1); /* "Pops out" */
+    background-color: theme('colors.red-accent');
+    color: #FFFFFF; /* White text for contrast */
+    font-weight: 600;
+    border: 2px solid theme('colors.red-accent-dark');
+    box-shadow: 0 4px 10px rgba(188, 0, 45, 0.3); /* Red glow */
+}
+
+/* REMOVED: .pay-button-gradient class */
+
+/* Quantity badge on menu items */
+/* UPDATED: Badges use red-accent */
+.item-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: theme('colors.red-accent');
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: 2px solid #f9fafb; /* Kept white border to pop from card */
+    transform: scale(0);
+    transition: transform 0.2s ease-out;
+}
+
+.item-badge.visible {
+    transform: scale(1);
+}
+
+/* Cart item badge (as shown in Figma) */
+/* UPDATED: Badges use red-accent */
+.cart-item-badge {
+    background-color: theme('colors.red-accent');
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+    /* Added border to match the card badges */
+    border: 2px solid #fff;
+}
+
+/* Sidebar transition */
+.cart-sidebar {
+    transition: transform 0.3s ease-in-out;
+}
+
+/* UPDATED: Header is now always black */
+header {
+    background-color: #000; /* Black background */
+    padding-left: 2.5rem; /* 40px */
+    padding-right: 2.5rem; /* 40px */
+    transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
+    position: relative; /* Needed for z-index to work */
+    z-index: 10; /* Keep header above main content */
+}
+header h1, header p {
+    transition: font-size 0.3s ease-in-out;
+    color: #FFF; /* Text is always white now */
 }

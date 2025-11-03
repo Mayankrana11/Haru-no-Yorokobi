@@ -1,63 +1,131 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Haru no Yorokobi — Menu</title>
-  <link rel="stylesheet" href="../styles/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haru no Yorokobi - Menu</title>
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- ADDED: Tailwind config for new theme colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'red-accent': '#BC002D',
+                        'red-accent-dark': '#9a0024',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Load Inter font --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- REMOVED: Inline <style> block -->
+    <!-- ADDED: Link to external stylesheet -->
+    <link rel="stylesheet" href="../styles/style.css">
+
 </head>
-<body>
-  <header class="topbar">
-    <div class="brand">
-      <div class="jp-title">春の喜び</div>
-      <div class="en-title">Haru no Yorokobi — Spring's Delight</div>
+<body class="bg-gray-900 flex items-center justify-center min-h-screen p-10">
+
+    <!-- 1. Tablet Wrapper --><div class="tablet-wrapper">
+        <div class="app-shell">
+            
+            <!-- 2. App Header --><!-- (HTML remains the same) --><header class="flex-shrink-0 bg-black flex justify-between items-center text-white">
+                <!-- Hamburger Menu Icon --><button id="menu-btn" class="p-2 rounded-lg hover:bg-zinc-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-7 h-7">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+                
+                <!-- Title --><div class="text-center">
+                    <h1 class="font-jp font-semibold tracking-wide">春の喜び</h1>
+                    <p class="tracking-wider">Haru no Yorokobi -- Spring's Delight</p>
+                </div>
+                
+                <!-- Review/Profile Icon (Now Open Cart Button) --><button id="open-cart-btn-header" class="rounded-full transform transition-transform hover:scale-110">
+                    <img src="../assets/icons/pay.png" alt="Open Cart" class="w-12 h-12 rounded-full" style="filter: grayscale(1) invert(1) brightness(2);">
+                </button>
+            </header>
+            
+            <!-- 3. Main Content Area --><main class="main-content p-8 relative">
+                <!-- Category Title (Dynamic) --><div class="mb-10">
+                    <h2 id="category-title" class="font-jp text-6xl font-bold text-zinc-900">Ramen <span class="text-5xl">拉麺</span></h2>
+                </div>
+                
+                <!-- Menu Grid (Dynamic) --><div id="menu-grid" class="grid grid-cols-2 gap-8">
+                    <!-- Menu items will be injected here by JavaScript --></div>
+
+                <!-- REMOVED: Floating Pay Button --></main>
+            
+            <!-- 4. Bottom Navigation Bar --><footer class="flex-shrink-0 bg-black flex justify-around items-center p-4"> 
+                <button class="nav-item text-white flex flex-col items-center p-3 rounded-xl" data-category="sushi">
+                    <span class="font-jp text-lg font-medium">寿司</span>
+                    <span class="text-sm font-medium">Sushi</span>
+                </button>
+                <button class="nav-item text-white active flex flex-col items-center p-3 rounded-xl" data-category="ramen">
+                    <span class="font-jp text-lg font-medium">拉麺</span>
+                    <span class="text-sm font-medium">Ramen</span>
+                </button>
+                <button class="nav-item text-white flex flex-col items-center p-3 rounded-xl" data-category="yakisoba">
+                    <span class="font-jp text-lg font-medium">焼きそば</span>
+                    <span class="text-sm font-medium">Yakisoba</span>
+                </button>
+                <button class="nav-item text-white flex flex-col items-center p-3 rounded-xl" data-category="bento">
+                    <span class="font-jp text-lg font-medium">弁当</span>
+                    <span class="text-sm font-medium">Bento</span>
+                </button>
+                <button class="nav-item text-white flex flex-col items-center p-3 rounded-xl" data-category="omakase">
+                    <span class="font-jp text-lg font-medium">お任se</span>
+                    <span class="text-sm font-medium">Omakase</span>
+                </button>
+            </footer>
+
+            <!-- 5. Cart Sidebar (Initially Hidden) --><aside id="cart-sidebar" class="cart-sidebar absolute top-0 right-0 h-full w-[450px] bg-white shadow-2xl transform translate-x-full z-50 flex flex-col">
+                <!-- Sidebar Header --><div class="flex justify-between items-center p-6 border-b border-gray-200">
+                    <h3 class="text-2xl font-bold text-zinc-900">Your Order</h3>
+                    <button id="close-cart-btn" class="rounded-full transform transition-transform hover:scale-110">
+                        <!-- UPDATED: Added filter to make pink icon white -->
+                        <img src="../assets/icons/cross.png" alt="Close Cart" class="w-12 h-12 rounded-full" style="filter: grayscale(1) invert(1) brightness(2);">
+                    </button>
+                </div>
+                
+                <!-- Cart Items List --><div id="cart-items-list" class="flex-grow p-6 space-y-4 overflow-y-auto">
+                    <!-- Cart items will be injected here by JavaScript --></div>
+                
+                <!-- Cart Footer --><div class="p-6 border-t border-gray-200 space-y-4">
+                    <div class="flex justify-between items-center text-xl">
+                        <span class="font-medium text-gray-600">Total:</span>
+                        <span id="total-price" class="font-bold text-zinc-900">₹0</span>
+                    </div>
+                    <!-- UPDATED: Button uses red-accent colors -->
+                    <button id="checkout-btn" class="bg-red-accent hover:bg-red-accent-dark w-full text-white py-4 rounded-xl flex items-center justify-center text-lg font-semibold space-x-2 transition-transform hover:scale-[1.02]">
+                        <span>Proceed to Payment</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                        </svg>
+                    </button>
+                </div>
+            </aside>
+
+        </div>
     </div>
-    <div class="table-display">Table No. <span id="table-number">7</span></div>
-  </header>
 
-  <main class="container">
-    <!-- Category Tabs -->
-    <nav class="categories" id="category-tabs"></nav>
+    <!-- 6. Custom Modal (for Review/Menu buttons) --><div id="custom-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-8 hidden">
+        <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
+            <h3 id="modal-title" class="text-2xl font-bold text-zinc-900 mb-4"></h3>
+            <p id="modal-message" class="text-gray-600 mb-6"></p>
+            <!-- UPDATED: Button uses red-accent colors -->
+            <button id="close-modal-btn" class="bg-red-accent hover:bg-red-accent-dark text-white px-6 py-2 rounded-lg font-medium">
+                Got it
+            </button>
+        </div>
+    </div>
 
-    <!-- Menu Section -->
-    <section class="menu-section" id="menu"></section>
+    <!-- REMOVED: Inline <script> block -->
+    <!-- ADDED: Link to external script -->
+    <script src="../scripts/script.js" defer></script>
 
-    <!-- Cart and Reviews Sidebar -->
-    <aside class="cart">
-      <h3>Order</h3>
-      <div id="cart-items"></div>
-      <div class="cart-total">Total: ₹<span id="cart-total">0.00</span></div>
-      <div class="cart-actions">
-        <button id="view-payment" class="btn">Proceed to Payment</button>
-      </div>
-
-      <!-- Review Section -->
-      <div class="reviews">
-        <h4>Average Rating: <span id="avg-rating">—</span></h4>
-        <div id="recent-reviews"></div>
-
-        <form id="review-form">
-          <input type="text" id="reviewer-name" placeholder="Your name (optional)" />
-          <select id="review-rating">
-            <option value="5">5 — Excellent</option>
-            <option value="4">4 — Very good</option>
-            <option value="3">3 — Good</option>
-            <option value="2">2 — Fair</option>
-            <option value="1">1 — Poor</option>
-          </select>
-          <textarea id="review-comment" rows="2" placeholder="Write a short review"></textarea>
-          <button type="submit" class="btn small">Submit Review</button>
-        </form>
-      </div>
-    </aside>
-  </main>
-
-  <footer class="footer">
-    <div>© Haru no Yorokobi</div>
-  </footer>
-
-  <!-- Script order matters -->
-  <script src="../scripts/review.js"></script>
-  <script src="../scripts/script.js"></script>
 </body>
 </html>

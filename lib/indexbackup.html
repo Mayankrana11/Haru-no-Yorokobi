@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haru no Yorokobi - Menu</title>
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- ADDED: Tailwind config for new theme colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'red-accent': '#BC002D',
+                        'red-accent-dark': '#9a0024',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Load Inter font --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Shippori+Mincho:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Custom styles to match the Figma design */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* This dark background provides the frame for the tablet */
+            background-color: #111827; /* Dark gray, almost black */
+        }
+
+        /* We'll use a wrapper to simulate the tablet's screen dimensions */
+        .tablet-wrapper {
+            width: 1024px;
+            height: 1350px;
+            margin: 40px auto; /* Center the tablet simulation */
+            border-radius: 2.5rem; /* Rounded corners for the tablet body */
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+            border: 12px solid #1a1a1a; /* Tablet bezel */
+            position: relative;
+        }
+
+        /* UPDATED: App shell is now white */
+        .app-shell {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background-color: #FFFFFF; /* Changed from gradient to white */
+        }
+
+        /* Custom Japanese font for titles */
+        .font-jp {
+            font-family: 'Shippori Mincho', serif;
+        }
+
+        /* Main content area styling */
+        .main-content {
+            background: #FFFFFF;
+            border-top-left-radius: 2.5rem;
+            border-top-right-radius: 2.5rem;
+            flex-grow: 1;
+            overflow-y: auto;
+            /* Smooth scrolling */
+            scroll-behavior: smooth;
+            /* REMOVED: Black border (header is black now) */
+        }
+
+        /* Custom scrollbar */
+        .main-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .main-content::-webkit-scrollbar-thumb {
+            background-color: #d1d5db; /* Light gray scrollbar */
+            border-radius: 4px;
+        }
+        .main-content::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        /* Active navigation item state */
+        .nav-item {
+            transition: all 0.2s ease-in-out;
+            opacity: 0.7; /* Inactive items are faded */
+            filter: blur(1px); /* "Blur out" inactive items */
+        }
+
+        /* UPDATED: Active nav item uses red-accent */
+        .nav-item.active {
+            opacity: 1;
+            filter: blur(0); /* Un-blur active item */
+            transform: scale(1.1); /* "Pops out" */
+            background-color: theme('colors.red-accent');
+            color: #FFFFFF; /* White text for contrast */
+            font-weight: 600;
+            border: 2px solid theme('colors.red-accent-dark');
+            box-shadow: 0 4px 10px rgba(188, 0, 45, 0.3); /* Red glow */
+        }
+        
+        /* REMOVED: .pay-button-gradient class */
+        
+        /* Quantity badge on menu items */
+        /* UPDATED: Badges use red-accent */
+        .item-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: theme('colors.red-accent');
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 2px solid #f9fafb; /* Kept white border to pop from card */
+            transform: scale(0);
+            transition: transform 0.2s ease-out;
+        }
+        
+        .item-badge.visible {
+            transform: scale(1);
+        }
+
+        /* Cart item badge (as shown in Figma) */
+        /* UPDATED: Badges use red-accent */
+        .cart-item-badge {
+            background-color: theme('colors.red-accent');
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            /* Added border to match the card badges */
+            border: 2px solid #fff;
+        }
+
+        /* Sidebar transition */
+        .cart-sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* UPDATED: Header is now always black */
+        header {
+            background-color: #000; /* Black background */
+            padding-left: 2.5rem; /* 40px */
+            padding-right: 2.5rem; /* 40px */
+            transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
+            position: relative; /* Needed for z-index to work */
+            z-index: 10; /* Keep header above main content */
+        }
+        header h1, header p {
+            transition: font-size 0.3s ease-in-out;
+            color: #FFF; /* Text is always white now */
+        }
+
+
+    </style>
+</head>
+<body class="bg-gray-900 flex items-center justify-center min-h-screen p-10">
+
+    <!-- 1. Tablet Wrapper --><div class="tablet-wrapper">
+        <div class="app-shell">
+            
+            <!-- 2. App Header --><!-- UPDATED: Added bg-black, text-white --><header class="flex-shrink-0 bg-black flex justify-between items-center text-white">
+                <!-- Hamburger Menu Icon --><!-- UPDATED: hover effect for dark background --><button id="menu-btn" class="p-2 rounded-lg hover:bg-zinc-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-7 h-7">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+                
+                <!-- Title --><div class="text-center">
+                    <h1 class="font-jp font-semibold tracking-wide">春の喜び</h1>
+                    <p class="tracking-wider">Haru no Yorokobi -- Spring's Delight</p>
+                </div>
+                
+                <!-- Review/Profile Icon (Now Open Cart Button) --><!-- UPDATED: Added filter to make pink icon white --><button id="open-cart-btn-header" class="rounded-full transform transition-transform hover:scale-110">
+                    <img src="../assets/icons/pay.png" alt="Open Cart" class="w-12 h-12 rounded-full" style="filter: grayscale(1) invert(1) brightness(2);">
+                </button>
+            </header>
+            
+            <!-- 3. Main Content Area --><main class="main-content p-8 relative">
+                <!-- Category Title (Dynamic) --><div class="mb-10">
+                    <h2 id="category-title" class="font-jp text-6xl font-bold text-zinc-900">Ramen <span class="text-5xl">拉麺</span></h2>
+                </div>
+                
+                <!-- Menu Grid (Dynamic) --><div id="menu-grid" class="grid grid-cols-2 gap-8">
+                    <!-- Menu items will be injected here by JavaScript --></div>
+
+                <!-- REMOVED: Floating Pay Button --></main>
+            
+            <!-- 4. Bottom Navigation Bar --><!-- UPDATED: Footer is black, text is white --><footer class="flex-shrink-0 bg-black flex justify-around items-center p-4"> 
+                <button class="nav-item text-white flex flex-col items-center p-3 rounded-xl" data-category="sushi">
+                    <span class="font-jp text-lg font-medium">寿司</span>
+                    <span class="text-sm font-medium">Sushi</span>
+                </button>
+                <button class="nav-item text-white active flex flex-col items-center p-3 rounded-xl" data-category="ramen">
+                    <span class="font-jp text-lg font-medium">拉麺</span>
+                    <span class="text-sm font-medium">Ramen</span>
+                </button>
+                <button class="nav-item text-white flex flex-col items-center p-3 rounded-xl" data-category="yakisoba">
+                    <span class="font-jp text-lg font-medium">焼きそば</span>
+                    <span class="text-sm font-medium">Yakisoba</span>
+                </button>
+                <button class="nav-item text-white flex flex-col items-center p-3 rounded-xl" data-category="bento">
+                    <span class="font-jp text-lg font-medium">弁当</span>
+                    <span class="text-sm font-medium">Bento</span>
+                </button>
+                <button class="nav-item text-white flex flex-col items-center p-3 rounded-xl" data-category="omakase">
+                    <span class="font-jp text-lg font-medium">お任se</span>
+                    <span class="text-sm font-medium">Omakase</span>
+                </button>
+            </footer>
+
+            <!-- 5. Cart Sidebar (Initially Hidden) --><aside id="cart-sidebar" class="cart-sidebar absolute top-0 right-0 h-full w-[450px] bg-white shadow-2xl transform translate-x-full z-50 flex flex-col">
+                <!-- Sidebar Header --><div class="flex justify-between items-center p-6 border-b border-gray-200">
+                    <h3 class="text-2xl font-bold text-zinc-900">Your Order</h3>
+                    <button id="close-cart-btn" class="rounded-full transform transition-transform hover:scale-110">
+                        <!-- UPDATED: Added filter to make pink icon white -->
+                        <img src="../assets/icons/cross.png" alt="Close Cart" class="w-12 h-12 rounded-full" style="filter: grayscale(1) invert(1) brightness(2);">
+                    </button>
+                </div>
+                
+                <!-- Cart Items List --><div id="cart-items-list" class="flex-grow p-6 space-y-4 overflow-y-auto">
+                    <!-- Cart items will be injected here by JavaScript --></div>
+                
+                <!-- Cart Footer --><div class="p-6 border-t border-gray-200 space-y-4">
+                    <div class="flex justify-between items-center text-xl">
+                        <span class="font-medium text-gray-600">Total:</span>
+                        <span id="total-price" class="font-bold text-zinc-900">₹0</span>
+                    </div>
+                    <!-- UPDATED: Button uses red-accent colors -->
+                    <button id="checkout-btn" class="bg-red-accent hover:bg-red-accent-dark w-full text-white py-4 rounded-xl flex items-center justify-center text-lg font-semibold space-x-2 transition-transform hover:scale-[1.02]">
+                        <span>Proceed to Payment</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                        </svg>
+                    </button>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+    <!-- 6. Custom Modal (for Review/Menu buttons) --><div id="custom-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-8 hidden">
+        <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
+            <h3 id="modal-title" class="text-2xl font-bold text-zinc-900 mb-4"></h3>
+            <p id="modal-message" class="text-gray-600 mb-6"></p>
+            <!-- UPDATED: Button uses red-accent colors -->
+            <button id="close-modal-btn" class="bg-red-accent hover:bg-red-accent-dark text-white px-6 py-2 rounded-lg font-medium">
+                Got it
+            </button>
+        </div>
+    </div>
+
+    <!-- 7. JavaScript Logic --><script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- DATA ---
+            const menuData = {
+                sushi: [
+                    { id: 's1', name: 'Salmon Roll', japaneseName: 'サーモンロール', price: 550, image: '../assets/images/salmon_roll.jpg' },
+                    { id: 's2', name: 'Tempura Roll', japaneseName: '天ぷらロール', price: 600, image: '../assets/images/tempura_roll.jpg' },
+                    { id: 's3', name: 'Sushi Platter', japaneseName: '寿司盛り合わせ', price: 1200, image: '../assets/images/sushi_platter.jpg' },
+                    { id: 's4', name: 'Sashimi', japaneseName: '刺身', price: 1100, image: '../assets/images/sashimi.jpg' },
+                    { id: 's5', name: 'Chirashi', japaneseName: 'ちらし', price: 1300, image: '../assets/images/chirashi.jpg' }
+                ],
+                ramen: [
+                    { id: 'r1', name: 'Nitamago Ramen', japaneseName: '煮卵ラーメン', price: 690, image: '../assets/images/nitamago_ramen.jpg' },
+                    { id: 'r2', name: 'Chicken Ramen', japaneseName: 'チキンラーメン', price: 650, image: '../assets/images/chicken_ramen.jpg' },
+                    { id: 'r3', name: 'Veg Ramen', japaneseName: '野菜ラーメン', price: 620, image: '../assets/images/vegetable_ramen.jpg' } // Placeholder updated
+                ],
+                yakisoba: [
+                    { id: 'y1', name: 'Chicken Yakisoba', japaneseName: 'チキン焼きそば', price: 700, image: '../assets/images/chicken_yakisoba.jpg' },
+                    { id: 'y2', name: 'Veg Yakisoba', japaneseName: '野菜焼きそば', price: 650, image: '../assets/images/yakisoba.jpg' } // Placeholder updated
+                ],
+                bento: [
+                    { id: 'b1', name: 'Chicken Bento', japaneseName: 'チキン弁当', price: 800, image: '../assets/images/chicken_bento.jpg' },
+                    { id: 'b2', name: 'Veg Bento', japaneseName: '野菜弁当', price: 750, image: '../assets/images/veg_bento.jpg' },
+                    { id: 'b3', name: 'Seafood Bento', japaneseName: '海鮮弁当', price: 900, image: 'https://placehold.co/400x300/f3f4f6/9ca3af?text=Seafood+Bento' } // Placeholder
+                ],
+                omakase: [
+                    { id: 'o1', name: 'Omakase Mystery', japaneseName: 'おまかせミステリー', price: 2500, image: '../assets/images/omakase_mystery.jpg' }
+                ]
+            };
+            
+            const categoryTitles = {
+                sushi: 'Sushi <span class="text-5xl">寿司</span>',
+                ramen: 'Ramen <span class="text-5xl">拉麺</span>',
+                yakisoba: 'Yakisoba <span class="text-5xl">焼きそば</span>',
+                bento: 'Bento <span class="text-5xl">弁当</span>',
+                omakase: 'Omakase <span class="text-5xl">お任せ</span>'
+            };
+
+            let cart = {}; // Stores { id: quantity }
+            let currentCategory = 'ramen'; // Default category
+
+            // --- DOM ELEMENTS ---
+            const menuGrid = document.getElementById('menu-grid');
+            const navButtons = document.querySelectorAll('.nav-item');
+            const categoryTitle = document.getElementById('category-title');
+            const cartSidebar = document.getElementById('cart-sidebar');
+            const closeCartBtn = document.getElementById('close-cart-btn');
+            // REMOVED: const payBtn = document.getElementById('pay-btn');
+            const cartItemsList = document.getElementById('cart-items-list');
+            const totalPriceEl = document.getElementById('total-price');
+            
+            // Modal Elements
+            const customModal = document.getElementById('custom-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalMessage = document.getElementById('modal-message');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const openCartBtnHeader = document.getElementById('open-cart-btn-header');
+            const menuBtn = document.getElementById('menu-btn');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            // --- NEW: SCROLL/HEADER LOGIC ELEMENTS ---
+            const mainContent = document.querySelector('.main-content');
+            const appHeader = document.querySelector('header');
+            const appShell = document.querySelector('.app-shell');
+            // Select title elements more specifically
+            const headerTitle = appHeader.querySelector('h1.font-jp');
+            const headerSubtitle = appHeader.querySelector('p'); // Simpler selector now
+
+            /**
+             * NEW: Updates header size based on scroll
+             */
+            function updateLayout() {
+                if (mainContent.scrollTop === 0) {
+                    // --- At Top: Enlarge Header ---
+                    
+                    // 1. Set Padding & Font Size
+                    appHeader.style.paddingTop = '8rem'; // py-32 (128px)
+                    appHeader.style.paddingBottom = '8rem'; // py-32 (128px)
+                    
+                    headerTitle.classList.remove('text-4xl');
+                    headerTitle.classList.add('text-7xl');
+                    
+                    headerSubtitle.classList.remove('text-lg');
+                    headerSubtitle.classList.add('text-2xl');
+
+                } else {
+                    // --- Scrolled: Default Header ---
+
+                    // 1. Set Padding & Font Size
+                    appHeader.style.paddingTop = '2.5rem'; // p-10 (40px)
+                    appHeader.style.paddingBottom = '2.5rem'; // p-10 (40px)
+                    
+                    headerTitle.classList.remove('text-7xl');
+                    headerTitle.classList.add('text-4xl');
+                    
+                    headerSubtitle.classList.remove('text-2xl');
+                    headerSubtitle.classList.add('text-lg');
+                }
+            }
+            
+            // Add scroll event listener
+            mainContent.addEventListener('scroll', updateLayout);
+            // --- END NEW LOGIC ---
+
+
+            // --- FUNCTIONS ---
+
+            /**
+             * Renders the menu items for a given category
+             */
+            function renderMenu(category) {
+                currentCategory = category;
+                menuGrid.innerHTML = ''; // Clear existing items
+                
+                // Update category title
+                // UPDATED: Category title element lookup
+                const titleElement = document.getElementById('category-title');
+                if (categoryTitles[category]) {
+                    titleElement.innerHTML = categoryTitles[category];
+                }
+                
+                const items = menuData[category];
+                
+                items.forEach(item => {
+                    const itemQty = cart[item.id] || 0;
+                    const badgeVisibleClass = itemQty > 0 ? 'visible' : '';
+
+                    // UPDATED: Card styles for "zoomed-in" feel
+                    const itemHtml = `
+                        <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col relative">
+                            <!-- Item Badge --><div id="badge-${item.id}" class="item-badge ${badgeVisibleClass}">
+                                ${itemQty}
+                            </div>
+
+                            <!-- Image --><img src="${item.image}" alt="${item.name}" class="w-full h-96 object-cover" 
+                                 onerror="this.src='https://placehold.co/400x300/e2e8f0/94a3b8?text=Image+Error'; this.onerror=null;">
+                            
+                            <!-- Content --><div class="p-6 flex flex-col flex-grow">
+                                <h3 class="font-jp text-3xl font-bold text-zinc-900">${item.name}</h3>
+                                <p class="text-xl text-gray-500 mb-4">${item.japaneseName}</p>
+                                
+                                <div class="flex justify-between items-center mt-auto pt-4">
+                                    <span class="text-3xl font-bold text-zinc-900">₹${item.price}</span>
+                                    
+                                    <div class="flex items-center space-x-3">
+                                        <!-- UPDATED: bg-red-accent -->
+                                        <button class="quantity-btn bg-red-accent text-white w-10 h-10 rounded-full text-3xl font-bold flex items-center justify-center leading-none transition-transform hover:scale-110" data-action="decrease" data-id="${item.id}">-</button>
+                                        <span id="quantity-${item.id}" class="text-3xl font-bold w-10 text-center">${itemQty}</span>
+                                        <!-- UPDATED: bg-red-accent -->
+                                        <button class="quantity-btn bg-red-accent text-white w-10 h-10 rounded-full text-3xl font-bold flex items-center justify-center leading-none transition-transform hover:scale-110" data-action="increase" data-id="${item.id}">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    menuGrid.innerHTML += itemHtml;
+                });
+
+                // Update nav button active state
+                navButtons.forEach(btn => {
+                    if (btn.dataset.category === category) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+
+            /**
+             * Handles changes in item quantity
+             */
+            function handleQuantityChange(itemId, action) {
+                let currentQty = cart[itemId] || 0;
+
+                if (action === 'increase') {
+                    currentQty++;
+                } else if (action === 'decrease') {
+                    currentQty = Math.max(0, currentQty - 1);
+                }
+
+                if (currentQty > 0) {
+                    cart[itemId] = currentQty;
+                } else {
+                    delete cart[itemId]; // Remove from cart if quantity is 0
+                }
+
+                // Update quantity display on the card
+                const quantityEl = document.getElementById(`quantity-${itemId}`);
+                if (quantityEl) {
+                    quantityEl.innerText = currentQty;
+                }
+                
+                // Update badge
+                const badgeEl = document.getElementById(`badge-${item.id}`);
+                if(badgeEl) {
+                    badgeEl.innerText = currentQty;
+                    if (currentQty > 0) {
+                        badgeEl.classList.add('visible');
+                    } else {
+                        badgeEl.classList.remove('visible');
+                    }
+                }
+
+                updateCart();
+            }
+
+            /**
+             * Finds an item by its ID across all categories
+             */
+            function getItemById(itemId) {
+                for (const category in menuData) {
+                    const item = menuData[category].find(i => i.id === itemId);
+                    if (item) return item;
+                }
+                return null;
+            }
+
+            /**
+             * Updates the cart sidebar UI and total price
+             */
+            function updateCart() {
+                cartItemsList.innerHTML = ''; // Clear list
+                let totalPrice = 0;
+
+                if (Object.keys(cart).length === 0) {
+                    cartItemsList.innerHTML = '<p class="text-gray-500 text-center">Your cart is empty.</p>';
+                } else {
+                    // Sort cart items to show most recently added (or just alphabetically)
+                    const sortedItemIds = Object.keys(cart).sort();
+                    
+                    sortedItemIds.forEach(itemId => {
+                        const item = getItemById(itemId);
+                        const quantity = cart[itemId];
+                        
+                        if (item && quantity > 0) {
+                            const itemTotalPrice = item.price * quantity;
+                            totalPrice += itemTotalPrice;
+
+                            const cartItemHtml = `
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-4">
+                                        <!-- Added item image with badge --><div class="relative flex-shrink-0">
+                                            <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover" onerror="this.src='https://placehold.co/64x64/e2e8f0/94a3b8?text=Img'; this.onerror=null;">
+                                            <span class="cart-item-badge absolute -top-2 -right-2">${quantity}</span>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold text-gray-800">${item.name}</p>
+                                            <p class="text-sm text-gray-500">@ ₹${item.price}</p>
+                                        </div>
+                                    </div>
+                                    <span class="font-semibold text-lg text-gray-900">₹${itemTotalPrice}</span>
+                                </div>
+                            `;
+                            cartItemsList.innerHTML += cartItemHtml;
+                        }
+                    });
+                }
+                
+                totalPriceEl.innerText = `₹${totalPrice}`;
+            }
+            
+            /**
+             * Shows or hides the cart sidebar
+             */
+            function toggleCart(show) {
+                if (show) {
+                    cartSidebar.classList.remove('translate-x-full');
+                } else {
+                    cartSidebar.classList.add('translate-x-full');
+                }
+            }
+
+            /**
+             * Shows a custom modal
+             */
+            function showModal(title, message) {
+                modalTitle.innerText = title;
+                modalMessage.innerText = message;
+                customModal.classList.remove('hidden');
+            }
+
+            /**
+             * Hides the custom modal
+             */
+            function hideModal() {
+                customModal.classList.add('hidden');
+            }
+
+
+            // --- EVENT LISTENERS ---
+
+            // Navigation bar
+            navButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    renderMenu(btn.dataset.category);
+                });
+            });
+
+            // Menu grid (for +/- buttons)
+            // FIXED: Removed extra parentheses around (e)
+            menuGrid.addEventListener('click', (e) => {
+                const button = e.target.closest('.quantity-btn');
+                if (button) {
+                    const { action, id } = button.dataset;
+                    handleQuantityChange(id, action);
+                }
+            });
+
+            // Cart buttons
+            // REMOVED: payBtn.addEventListener('click', () => toggleCart(true));
+            closeCartBtn.addEventListener('click', () => toggleCart(false));
+            openCartBtnHeader.addEventListener('click', () => toggleCart(true));
+            
+            // Modal buttons
+            closeModalBtn.addEventListener('click', hideModal);
+            
+            /* Removed reviewBtn listener
+            reviewBtn.addEventListener('click', () => {
+                showModal('Reviews Page', 'This is where the customer review page would be displayed. This feature is currently in development.');
+            });
+            */
+            
+            // FIXED: Removed _STATE_ from arrow function
+            menuBtn.addEventListener('click', () => {
+                showModal('Menu Options', 'This would typically open a settings or navigation menu. This feature is currently in development.');
+            });
+            
+            // FIXED: Removed _STATE_ from arrow function
+            checkoutBtn.addEventListener('click', () => {
+                if (Object.keys(cart).length === 0) {
+                    showModal('Empty Cart', 'Please add some items to your cart before proceeding to payment.');
+                } else {
+                    showModal('Proceed to Payment', 'This will redirect to the payment gateway. This feature is currently in development.');
+                    // In a real app, you'd redirect or open a payment modal here.
+                    toggleCart(false); // Close cart after
+                }
+            });
+
+            // --- INITIAL RENDER ---
+            renderMenu(currentCategory);
+
+            // NEW: Call layout function on load to set initial state
+            updateLayout();
+
+        });
+    </script>
+
+</body>
+</html>
+

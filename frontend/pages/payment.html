@@ -1,30 +1,58 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Payment — Haru no Yorokobi</title>
-  <link rel="stylesheet" href="../styles/payment.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Haru no Yorokobi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'red-accent': '#BC002D',
+                        'red-accent-dark': '#9a0024',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../styles/payment.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-  <main class="payment-container">
-    <h2>Payment</h2>
-    <div id="order-summary"></div>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-10 rounded-2xl shadow-xl max-w-lg w-full">
+        <h1 class="text-3xl font-bold text-zinc-900 mb-6 text-center">Complete Your Payment</h1>
+        
+        <form id="payment-form" class="space-y-6">
+            <div>
+                <label for="card-number" class="block text-sm font-medium text-gray-700">Card Number</label>
+                <input type="text" id="card-number" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-red-accent focus:border-red-accent" placeholder="**** **** **** ****" required>
+            </div>
+            
+            <div class="flex space-x-4">
+                <div class="flex-1">
+                    <label for="expiry-date" class="block text-sm font-medium text-gray-700">Expiry Date</label>
+                    <input type="text" id="expiry-date" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-red-accent focus:border-red-accent" placeholder="MM / YY" required>
+                </div>
+                <div class="flex-1">
+                    <label for="cvc" class="block text-sm font-medium text-gray-700">CVC</label>
+                    <input type="text" id="cvc" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-red-accent focus:border-red-accent" placeholder="***" required>
+                </div>
+            </div>
+            
+            <div>
+                <label for="card-holder" class="block text-sm font-medium text-gray-700">Card Holder Name</label>
+                <input type="text" id="card-holder" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-red-accent focus:border-red-accent" placeholder="John M. Doe" required>
+            </div>
 
-    <div class="methods">
-      <label><input type="radio" name="method" value="UPI" checked /> UPI (QR)</label>
-      <label><input type="radio" name="method" value="CARD" /> Credit/Debit Card</label>
-      <label><input type="radio" name="method" value="CASH" /> Pay at Counter (Cash)</label>
+            <button type="submit" class="w-full bg-red-accent hover:bg-red-accent-dark text-white py-4 rounded-xl text-lg font-semibold transition-colors">
+                Pay Now
+            </button>
+            <a href="index.html" class="block text-center text-gray-600 hover:text-black mt-4">Cancel and go back</a>
+        </form>
     </div>
 
-    <div id="method-area"></div>
-
-    <div class="actions">
-      <button id="pay-btn" class="btn">Pay / Confirm</button>
-      <a href="index.html" class="btn ghost">Back to Menu</a>
-    </div>
-  </main>
-
-  <script src="../scripts/payment.js"></script>
+    <script src="../scripts/payment.js"></script>
 </body>
 </html>

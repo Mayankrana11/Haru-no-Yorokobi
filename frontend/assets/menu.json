@@ -1,111 +1,119 @@
-[
-  {
-    "category": "Sushi",
-    "items": [
+{
+  "menuData": {
+    "sushi": [
       {
-        "japaneseName": "寿司",
-        "englishName": "Sushi Platter",
-        "description": "An assortment of traditional nigiri sushi served with wasabi and soy sauce.",
-        "price": 480,
-        "imagePath": "../assets/images/sushi_platter.jpg"
-      },
-      {
+        "id": "s1",
+        "name": "Salmon Roll",
         "japaneseName": "サーモンロール",
-        "englishName": "Salmon Roll",
-        "description": "Fresh salmon roll wrapped in seasoned rice and nori.",
-        "price": 520,
-        "imagePath": "../assets/images/salmon_roll.jpg"
-      },
-      {
-        "japaneseName": "天ぷらロール",
-        "englishName": "Tempura Roll",
-        "description": "Crispy tempura-fried prawn roll with light soy glaze.",
         "price": 550,
-        "imagePath": "../assets/images/tempura_roll.jpg"
-      }
-    ]
-  },
-  {
-    "category": "Ramen",
-    "items": [
-      {
-        "japaneseName": "鶏ラーメン",
-        "englishName": "Chicken Ramen",
-        "description": "Rich chicken broth with noodles, green onions, and seasoned egg.",
-        "price": 450,
-        "imagePath": "../assets/images/chicken_ramen.jpg"
+        "image": "../assets/images/salmon_roll.jpg"
       },
       {
+        "id": "s2",
+        "name": "Tempura Roll",
+        "japaneseName": "天ぷらロール",
+        "price": 600,
+        "image": "../assets/images/tempura_roll.jpg"
+      },
+      {
+        "id": "s3",
+        "name": "Sushi Platter",
+        "japaneseName": "寿司盛り合わせ",
+        "price": 1200,
+        "image": "../assets/images/sushi_platter.jpg"
+      },
+      {
+        "id": "s4",
+        "name": "Sashimi",
+        "japaneseName": "刺身",
+        "price": 1100,
+        "image": "../assets/images/sashimi.jpg"
+      },
+      {
+        "id": "s5",
+        "name": "Chirashi",
+        "japaneseName": "ちらし",
+        "price": 1300,
+        "image": "../assets/images/chirashi.jpg"
+      }
+    ],
+    "ramen": [
+      {
+        "id": "r1",
+        "name": "Nitamago Ramen",
         "japaneseName": "煮卵ラーメン",
-        "englishName": "Nitamago Ramen",
-        "description": "Signature ramen with soft-boiled egg, bamboo shoots, and chashu-style chicken.",
-        "price": 490,
-        "imagePath": "../assets/images/nitamago_ramen.jpg"
+        "price": 690,
+        "image": "../assets/images/nitamago_ramen.jpg"
       },
       {
+        "id": "r2",
+        "name": "Chicken Ramen",
+        "japaneseName": "チキンラーメン",
+        "price": 650,
+        "image": "../assets/images/chicken_ramen.jpg"
+      },
+      {
+        "id": "r3",
+        "name": "Veg Ramen",
         "japaneseName": "野菜ラーメン",
-        "englishName": "Vegetable Ramen",
-        "description": "Healthy miso ramen loaded with fresh seasonal vegetables.",
-        "price": 420,
-        "imagePath": "../assets/images/vegetable_ramen.jpg"
-      }
-    ]
-  },
-  {
-    "category": "Yakisoba",
-    "items": [
-      {
-        "japaneseName": "焼きそば",
-        "englishName": "Classic Yakisoba",
-        "description": "Stir-fried noodles with vegetables and house yakisoba sauce.",
-        "price": 380,
-        "imagePath": "../assets/images/yakisoba.jpg"
-      },
-      {
-        "japaneseName": "チキン焼きそば",
-        "englishName": "Chicken Yakisoba",
-        "description": "Savory yakisoba with tender chicken and spring onions.",
-        "price": 420,
-        "imagePath": "../assets/images/chicken_yakisoba.jpg"
-      }
-    ]
-  },
-  {
-    "category": "Bento",
-    "items": [
-      {
-        "japaneseName": "弁当ボックス",
-        "englishName": "Vegetable Bento Box",
-        "description": "Traditional bento with steamed rice, pickles, and vegetable tempura.",
-        "price": 480,
-        "imagePath": "../assets/images/veg_bento.jpg"
-      },
-      {
-        "japaneseName": "シーフード弁当",
-        "englishName": "Seafood Bento Box",
-        "description": "Combination of grilled fish, shrimp tempura, and rice with miso soup.",
         "price": 620,
-        "imagePath": "../assets/images/seafood_bento.jpg"
+        "image": "../assets/images/vegetable_ramen.jpg"
+      }
+    ],
+    "yakisoba": [
+      {
+        "id": "y1",
+        "name": "Chicken Yakisoba",
+        "japaneseName": "チキン焼きそば",
+        "price": 700,
+        "image": "../assets/images/chicken_yakisoba.jpg"
       },
       {
+        "id": "y2",
+        "name": "Veg Yakisoba",
+        "japaneseName": "野菜焼きそば",
+        "price": 650,
+        "image": "../assets/images/yakisoba.jpg"
+      }
+    ],
+    "bento": [
+      {
+        "id": "b1",
+        "name": "Chicken Bento",
         "japaneseName": "チキン弁当",
-        "englishName": "Chicken Bento Box",
-        "description": "Grilled teriyaki chicken with rice, salad, and tamago omelet.",
-        "price": 540,
-        "imagePath": "../assets/images/chicken_bento.jpg"
+        "price": 800,
+        "image": "../assets/images/chicken_bento.jpg"
+      },
+      {
+        "id": "b2",
+        "name": "Veg Bento",
+        "japaneseName": "野菜弁当",
+        "price": 750,
+        "image": "../assets/images/veg_bento.jpg"
+      },
+      {
+        "id": "b3",
+        "name": "Seafood Bento",
+        "japaneseName": "海鮮弁当",
+        "price": 900,
+        "image": "../assets/images/seafoodbento.jpg"
+      }
+    ],
+    "omakase": [
+      {
+        "id": "o1",
+        "name": "Omakase Mystery",
+        "japaneseName": "おまかせミステリー",
+        "price": 2500,
+        "image": "../assets/images/omakase_mystery.jpg"
       }
     ]
   },
-  {
-    "category": "Omakase",
-    "items": [
-      {
-        "japaneseName": "おまかせ",
-        "englishName": "Chef’s Omakase",
-        "description": "A surprise course prepared by the chef — a mystery of spring’s delight.",
-        "price": 999,
-        "imagePath": "../assets/images/omakase_mystery.jpg"
-      }
-    ]
+  "categoryTitles": {
+    "sushi": "Sushi <span class=\"text-5xl\">寿司</span>",
+    "ramen": "Ramen <span class=\"text-5xl\">拉麺</span>",
+    "yakisoba": "Yakisoba <span class=\"text-5xl\">焼きそば</span>",
+    "bento": "Bento <span class=\"text-5xl\">弁当</span>",
+    "omakase": "Omakase <span class=\"text-5xl\">お任せ</span>"
   }
-]
+}

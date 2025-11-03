@@ -1,7 +1,14 @@
 [
-  {"name":"Aditi","rating":4,"comment":"The ramen broth was authentic and flavorful."},
-  {"name":"Rohan","rating":5,"comment":"Best Japanese experience I've had in India!"},
-  {"name":"Neha","rating":3,"comment":"Good taste but the waiting time was a bit long."},
-  {"name":"Arjun","rating":4,"comment":"Great sushi rolls and beautiful presentation."},
-  {"name":"Mayank","rating":5,"comment":"Excellent sushi and ramen! Loved the ambiance."}
+    {
+        "id": 1,
+        "author": "Aika Tanaka",
+        "rating": 5,
+        "comment": "The Nitamago Ramen was absolutely divine! Best I've had outside of Tokyo."
+    },
+    {
+        "id": 2,
+        "author": "Kenji Watanabe",
+        "rating": 4,
+        "comment": "Great sushi platter, very fresh. A bit pricey but worth it for the quality."
+    }
 ]
